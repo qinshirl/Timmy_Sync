@@ -58,12 +58,12 @@ export default function PhotoAlbumPage() {
     photos.forEach((photo) => fetchComments(photo.id))
   }, [photos])
 
-  // === Realtime subscription
+  // realtime subscription
   useEffect(() => {
     const channel = supabase
       .channel("comments-channel", {
         config: {
-          broadcast: { self: false }, // don’t broadcast to sender
+          broadcast: { self: false }, 
         },
       })
       .on("broadcast", { event: "new-comment" }, 
@@ -71,7 +71,7 @@ export default function PhotoAlbumPage() {
         const newComment = payload.payload as Comment
         setCommentsMap((prev) => {
           const photoComments = prev[newComment.photoId] || []
-          // Prevent duplicates
+          // check duplicate
           const alreadyExists = photoComments.some((c) => c.id === newComment.id)
           if (alreadyExists) return prev
           return {
@@ -87,7 +87,7 @@ export default function PhotoAlbumPage() {
     }
   }, [])
 
-  // === Handle photo upload
+  // photo upload
   const handleUpload = async ({ file }: { file: File }) => {
     setUploading(true)
     const formData = new FormData()
@@ -109,7 +109,7 @@ export default function PhotoAlbumPage() {
     setUploading(false)
   }
 
-  // === Delete photo
+  // delete photo
   const handleRemove = async (file: UploadFile) => {
     const res = await fetch(`/api/photo/delete/${file.uid}`, {
       method: "DELETE",

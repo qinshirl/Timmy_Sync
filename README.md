@@ -149,8 +149,8 @@ The main objectives of the project were:
 #### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/timmysync.git
-cd timmysync
+git clone https://github.com/qinshirl/ece1724_webdev_project.git
+cd ece1724_webdev_project
 ```
 
 ### Install Dependencies
