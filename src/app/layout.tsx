@@ -1,5 +1,6 @@
 import "../styles/globals.css"
 import "antd/dist/reset.css"; // v5
+import 'leaflet/dist/leaflet.css'
 
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"

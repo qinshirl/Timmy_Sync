@@ -14,23 +14,28 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String   @unique
+  email         String    @unique
   emailVerified DateTime?
   password      String
-  partnerCode   String?  @unique
-  partnerId     String?  @unique
-  partner       User?    @relation("PartnerRelation", fields: [partnerId], references: [id])
-  partnerOf     User?    @relation("PartnerRelation")
+  partnerCode   String?   @unique
+  partnerId     String?   @unique
+  partner       User?     @relation("PartnerRelation", fields: [partnerId], references: [id])
+  partnerOf     User?     @relation("PartnerRelation")
 
-  createdDates  ImportantDate[] @relation("CreatedDates")  
-  partnerDates  ImportantDate[] @relation("PartnerDates")  
+  createdDates ImportantDate[] @relation("CreatedDates")
+  partnerDates ImportantDate[] @relation("PartnerDates")
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  uploadedPhotos Photo[]
+
+  comments Comment[]
+
+  location       Location?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
 
 model ImportantDate {
   id          String   @id @default(cuid())
@@ -39,10 +44,42 @@ model ImportantDate {
   date        DateTime
 
   createdById String
-  createdBy   User     @relation("CreatedDates", fields: [createdById], references: [id])
+  createdBy   User   @relation("CreatedDates", fields: [createdById], references: [id])
 
-  partnerId   String
-  partner     User     @relation("PartnerDates", fields: [partnerId], references: [id])
+  partnerId String
+  partner   User   @relation("PartnerDates", fields: [partnerId], references: [id])
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id         String   @id @default(cuid())
+  path       String
+  uploader   User     @relation(fields: [uploaderId], references: [id])
+  uploaderId String
+  partnerId  String // can be used to display to both users
+  createdAt  DateTime @default(now())
+
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+
+  photo   Photo  @relation(fields: [photoId], references: [id])
+  photoId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Location {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  latitude  Float
+  longitude Float
+  updatedAt DateTime @updatedAt
 }

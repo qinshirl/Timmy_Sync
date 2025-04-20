@@ -17,6 +17,8 @@ import type { CalendarProps } from "antd"
 import { Popconfirm } from "antd"
 import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
+import { Button as AntButton } from "antd"
+import { ReloadOutlined, ArrowLeftOutlined, DeleteOutlined } from "@ant-design/icons"
 
 export default function ImportantDatesPage() {
   const router = useRouter()
@@ -85,9 +87,10 @@ export default function ImportantDatesPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Important Dates</h1>
-        <Button onClick={() => router.push("/")}>← Back</Button>
+      <div className="text-right mb-2">
+        <AntButton type="link" href="/" icon={<ArrowLeftOutlined />}>
+          Back to Home
+        </AntButton>
       </div>
 
       <div className="mb-4">
@@ -120,7 +123,8 @@ export default function ImportantDatesPage() {
 
       {dates.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-4">Our Dates</h2>
+            <div style={{ marginBottom: "1rem" }}></div>
+          {/* <h2 className="text-lg font-semibold mb-4">Our Dates</h2> */}
           <Row gutter={[16, 16]}>
             {dates.map((item) => {
               const today = dayjs()
@@ -142,7 +146,7 @@ export default function ImportantDatesPage() {
                           cancelText="No"
                         >
                           <Button size="small" danger>
-                            ⨉
+                            <DeleteOutlined />
                           </Button>
                         </Popconfirm>
                       }
@@ -150,7 +154,7 @@ export default function ImportantDatesPage() {
                     style={{ textAlign: "center" }}
                     bordered
                   >
-                    <div className="text-5xl font-bold text-blue-600">{days}</div>
+                    <div style={{ fontSize: "3rem", fontWeight: "bold", color: "#1e3a8a" }}>{days}</div>
                     <p className="text-sm mt-2 text-gray-600">
                       {isPast
                         ? `days since ${eventDate.format("YYYY-MM-DD")}`

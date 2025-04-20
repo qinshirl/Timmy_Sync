@@ -1,151 +1,275 @@
-**ECE1724 Project: Relationship Enhancement Web Application**
+# TimmySync – A Relationship Enhancement Web Application
 
-**Shirley Qin**
-Department of Electrical and Computer Engineering
-University of Toronto
-Toronto, Canada
-shirley.qin@mail.utoronto.ca
+## Team Information
 
-**Yuyang(Ryan) Zeng**
-Department of Electrical and Computer Engineering
-University of Toronto
-Toronto, Canada
-ryanyy.zeng@mail.utoronto.ca
+- **Shirley Qin**  
+  Student Number: 1004555297  
+  Email: shirley.qin@mail.utoronto.ca
 
-## **1. Motivation**
-
-Maintaining a strong and healthy relationship requires effort, communication, and shared experiences. Many couples struggle with organizing important dates, preserving memories, and staying connected, especially in long-distance relationships or busy daily lives. While several existing applications address individual aspects of relationship management, there is no single solution that integrates event tracking, shared albums with commenting, and real-time location sharing into a unified experience.
-
-As a team of two developers who are also a couple, we personally experience the challenges of managing different aspects of our relationship using multiple apps. We often find ourselves using separate platforms for tracking important dates, sharing travel photos, and occasionally checking each other’s location for convenience. However, juggling between different apps is inefficient and impersonal. We wanted to create a single platform designed specifically for couples that seamlessly integrates these essential features into one space.
-
-This project is not just a technical challenge for us—it is a meaningful application that we would personally use, making it an exciting opportunity to build something practical and valuable for other couples as well.
-
-### **Problem Statement**
-
-Many couples like us have used multiple apps to manage different aspects of their relationships:
-
-​ • **Calendar Apps** (DaysMatter) for tracking important dates.
-
-​ • **Photo Sharing Apps** (iCloud) for sharing and storing memories.
-
-​ • **Location Sharing Apps** (Zenly) for staying connected.
-
-However, these apps are not designed specifically for couples and lack a dedicated, integrated experience. Managing multiple apps can be inconvenient, disjointed, and impersonal. Couples often want a personalized space where they can track their relationship milestones, cherish shared moments, and stay connected in real-time.
-
-Our project aims to bridge this gap by creating a couple-centric web application that combines:
-
-​ 1. **Tracking important dates** (anniversaries, birthdays, and special milestones).
-
-​ 2. **A shared album with commenting** (to store and discuss photos together).
-
-​ 3. **Real-time location sharing** (to improve connection and safety).
-
-#### **Target Users**
-
-​ • **Committed Couples**: Couples looking to maintain and strengthen their relationships.
-
-​ • **Long-Distance Couples**: Those who rely on technology to stay connected.
-
-​ • **Busy Professionals**: Those who need an easy-to-use, organized way to track their relationship.
-
-​ • **New Couples**: Those wanting a digital way to document and celebrate their relationship milestones.
+- **Yuyang Zeng**  
+  Student Number: 1005777054  
+  Email: ryanyy.zeng@mail.utoronto.ca
 
 ---
 
-## **2. Objective and Key Features**
+## Motivation
 
-### **Objective**
+Maintaining meaningful communication in a relationship can be challenging, especially during busy periods or long-distance situations. We wanted to create an application that helps couples stay emotionally connected by offering shared tools for daily interaction, memory sharing, and real-time location awareness.
 
-Develop a full-stack web application where couples can track important dates, share photos with comments, and view each other’s real-time location in a seamlessly integrated experience.
-
-#### **Key Features**
-
-​ 1. **User Registration & Authentication**
-
-​ • Email/password login with email verification.
-
-​ • Google login integration using NextAuth.js.
-
-​ • Users can register with their name, email, and password.
-
-​ • Users will need to verify their email to activate the account.
-
-​ • To ensure security, hash password using bcrypt.js
-
-​ 2. **Partner Linking System**
-
-​ • Users who sign up will initially access only their own data.
-
-​ • A user can generate a unique partner code.
-
-​ • Their partner can enter this code to establish a relationship link.
-
-​ • Once linked, they will have shared access to features.
-
-​ • A user account can only generate one unique partner code and link to one other user.
-
-​ • Once two users are linked, the feature disappears (no option to generate a new code).
-
-​ • No unlinking is allowed, ensuring that users remain permanently linked (ensuring that the application remains exclusive for couples and prevents unintended misuse, such as linking with multiple people or frequent partner switching)
-
-​ 3. **Important Date Tracking**
-
-​ • Users can add, edit, and delete significant dates (anniversaries, birthdays)
-
-​ • Linked partners can see and share their important dates.
-
-​ • Automated reminders for upcoming events (TBD - optional feature)
-
-​ • Dates stored in PostgreSQL, ensuring structured relational data.
-
-​ 4. **Shared Photo Albums with Commenting**
-
-​ • Users can upload photos to shared albums.
-
-​ • Photos are stored securely using cloud storage (AWS S3 /Supabase Storage).
-
-​ • Real-time commenting for each photo.
-
-​ • Uses WebSockets (socket.io) or Supabase Realtime to provide instant updates.
-
-​ 5. **Real-Time Location Sharing**
-
-​ • Users can choose to share their live location with their partner.
-
-​ • Google Maps API integration to display location visually.
-
-​ • Uses WebSockets for real-time updates.
-
-​ • Users can toggle location sharing ON/OFF (TBD - optional feature)
-
-#### **Technical Implementation Approach**
-
-**Architecture Choice: Next.js Full-Stack**
-
-We will implement **Next.js 13+ with the App Router** for both frontend and backend logic.
-
-​ **Frontend**
-
-​ • **Framework:** Next.js 13+ (Server Components).
-
-​ • **Styling:** Tailwind CSS + shadcn/ui for UI components.
-
-​ • **Authentication:** NextAuth.js for email/password & Google login.
-
-​ • **State Management:** Server Actions for form handling and API mutations.
-
-​ • **Real-time Interactivity:** WebSockets for comments and location sharing.
-
-​ **Backend**
-
-​ • **Database:** PostgreSQL, managed using Prisma ORM.
-
-​ • **API Routes:** Built-in Next.js API Routes for data handling.
-
-​ • **File Handling:** Cloud storage for photo uploads (AWS S3/Supabase Storage).
-
-​ • **WebSockets (socket.io)**: Real-time communication for location tracking and comments.
+Our motivation stemmed from real-life needs. We noticed how many couples, including ourselves, could benefit from an easy-to-use tool that centralizes important shared moments, provides location awareness, and lets them leave spontaneous messages or photos in a shared space.
 
 ---
 
-This project will help couples maintain stronger relationships by combining important date tracking, shared photo albums with real-time commenting, and real-time location sharing into a single, integrated web application. Using Next.js Full-Stack, we ensure efficient performance, scalability, and ease of deployment. By dividing tasks effectively, we can realistically complete the project within the course timeframe.
+## Objectives
+
+The main objectives of the project were:
+
+- To create a real-time, partner-connected application where users can:
+  - Track and view important shared dates (anniversaries, birthdays, etc.).
+  - Upload, preview, and comment on shared photos.
+  - Share live location with each other.
+- Ensure the app is intuitive, aesthetically pleasing, and functionally responsive.
+- Support authentication, user linking, and mutual partner pairing logic.
+
+---
+
+## Technical Stack
+
+- **Framework**: Next.js 13+ (App Router with server and client components)
+- **Frontend Libraries**:
+  - Ant Design (UI Components)
+  - Tailwind CSS (Custom styling)
+  - Shadcn/UI (Supplemental UI styling)
+- **Backend**:
+  - Next.js server-side route handlers (API routes)
+  - Supabase (for PostgreSQL database + storage)
+- **Database**:
+  - Supabase PostgreSQL with Prisma ORM
+- **Cloud Storage**:
+  - Supabase Storage for hosting uploaded images
+- **Authentication**:
+  - NextAuth.js with email/password credentials
+- **Real-time features**:
+  - Supabase Realtime (for live location updates and comments)
+
+---
+
+## Features
+
+### 1. User Authentication
+
+- Sign up, sign in, and sign out functionality.
+- Email and password-based credentials using NextAuth.
+- Redirection based on session status.
+    <!-- ![Sign In](./public/screenshots/signin.png)
+    ![Sign Up](./public/screenshots/signup.png) -->
+    <p align="center">
+    <img src="./public/screenshots/signin.png" alt="Sign In" width="45%" />
+    &nbsp;
+    <img src="./public/screenshots/signup.png" alt="Sign Up" width="45%" />
+  </p>
+
+### 2. Partner Linking System
+
+- Each user is assigned a unique partner code.
+- A user can input a code to link with their partner.
+- Mutual relationship setup using self-referencing relation in the database.
+  ![Partner Linking](./public/screenshots/link.png)
+
+### 3. Important Dates Tracker
+
+- Users can create events like anniversaries, birthdays, or custom milestones.
+- Dates are categorized and rendered in a readable format.
+- Each user sees events created by either themselves or their partner.
+  ![Dates Tracker](./public/screenshots/dates.png)
+
+### 4. Shared Photo Album
+
+- Upload images with drag-and-drop UI.
+- Display photos in uniform-sized cards with a zoom preview feature.
+- Commenting system on each photo.
+- Real-time comment updates using Supabase Realtime.
+  ![Shared Photo Album](./public/screenshots/photos.png)
+
+### 5. Real-Time Location Sharing
+
+- Geolocation is captured from the browser and updated every few seconds.
+- Partner's location is fetched both via polling and Supabase real-time events.
+- Google Maps API displays both users' markers, along with a line indicating the distance.
+  ![Real-Time Location Sharing](./public/screenshots/location.png)
+
+---
+
+## User Guide
+
+### Sign Up / Sign In
+
+- Users start by creating an account or signing in via email/password.
+
+### Linking Partners
+
+- Once signed in, a user is shown their partner code.
+- Inputting a valid partner code links two users.
+- Once linked, users gain access to shared features.
+
+### Using Features
+
+#### Important Dates
+
+- Navigate to the "Important Dates" section.
+- Add a new date using the form, specifying title, date, and description.
+- Dates are saved and displayed in an ordered card format.
+
+#### Shared Photo Album
+
+- Navigate to "Shared Photo Album".
+- Drag and drop to upload an image.
+- Click a photo to view it full size.
+- Scroll below to view and post comments.
+
+#### Real-Time Location
+
+- Navigate to "Real-Time Location".
+- The map shows both users' current positions.
+- Locations update automatically in real time.
+- Distance is shown visually as a line between the markers.
+
+---
+
+## Development Guide
+
+### 1. Environment Setup
+
+#### Prerequisites
+
+- Node.js 18+
+- PostgreSQL-compatible database (using Supabase)
+- Google Maps JavaScript API Key
+
+#### Clone the repository
+
+```bash
+git clone https://github.com/your-username/timmysync.git
+cd timmysync
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### Environment Variables
+
+Create a `.env.local` file in the root of your project with the following content:
+
+```env
+# PostgreSQL database connection
+DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
+
+# NextAuth authentication
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+
+# Supabase
+SUPABASE_URL=https://yourproject.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_BUCKET=your_bucket_name
+
+# Google Maps
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+```
+
+> **Note:** Never commit the `.env.local` file to version control. Use `.env.example` for structure reference.
+
+---
+
+### Database Initialization
+
+Run the following commands to generate and push the schema to Supabase/PostgreSQL:
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+---
+
+### Cloud Storage Configuration
+
+We used [Supabase Storage](https://supabase.com/storage) for hosting uploaded photos.
+
+To configure:
+
+1. Go to your Supabase project.
+2. Navigate to **Storage > Buckets**.
+3. Create a private bucket (e.g., `photo-album`) and use this bucket name in `.env.local` as `SUPABASE_BUCKET`.
+
+Also make sure Row Level Security (RLS) is disabled for this bucket if needed.
+
+---
+
+### Local Development and Testing
+
+To run the development server locally:
+
+```bash
+npm run dev
+```
+
+Access the app at:
+
+```
+http://localhost:3000
+```
+
+Ensure Supabase and PostgreSQL URLs in your `.env.local` file point to your hosted services or local mock services.
+
+---
+
+### **Individual Contributions**
+
+#### **Shirley Qin**
+
+- Implemented authentication (sign up/sign in) using NextAuth.js and designed the partner linking system.
+- Built the full-featured important date management system. Created interfaces for adding, viewing, and managing shared events.
+- Designed and developed the upload interface of the Shard Photo Album , built real-time photo commenting using Supabase Realtime, with efficient updates and UI interaction.
+- Handled styling and layout using Ant Design and Tailwind CSS across all pages.
+- Managed overall project structure, code organization, and authored the final report.
+
+#### **Yuyang Zeng**
+
+- Designed the database schema with Prisma and configured Supabase Storage.
+- Implemented the live location sharing feature using the browser's Geolocation API and Supabase Realtime broadcast. Developed logic to poll and broadcast location updates, including rendering both users on a Google Map with markers and distance line.
+- Built backend API routes for location, photo, and comment handling.
+- Contributed to UI components, Sign In/Sign Up forms, authored and reviewed the final report.
+
+---
+
+## Lessons Learned and Concluding Remarks
+
+This project allowed us to go beyond basic CRUD functionality and integrate real-time and cloud storage features using full-stack Next.js. Some of the most valuable technical and soft skills we developed include:
+
+- Working with **Supabase Realtime** and storage in a production-like context.
+- Using **NextAuth.js** for secure authentication with session handling.
+- Combining **Ant Design** with **Tailwind CSS** for elegant and responsive UI.
+- Structuring a modular **Next.js App Router** layout across several pages and APIs.
+- Learning to debug complex state and broadcast interactions in real-time systems.
+- Collaborating efficiently through GitHub and dividing responsibilities while keeping consistency.
+
+We’re proud that this app reflects a personal use case and provides a real tool for improving daily communication and closeness between partners. We believe **TimmySync** could be extended further in the future with mobile responsiveness, notifications, and user customization.
+
+---
+
+## Video Demo
+
+**Video URL:**
+https://drive.google.com/file/d/1chhJV58txvTedm4AqwEKWlxXVadODBPt/view?usp=sharing
+
+---
+
+## License
+
+This project is for academic use only. All rights reserved to the project team (Shirley Qin & Yuyang Zeng).
