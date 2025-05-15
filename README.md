@@ -3,11 +3,9 @@
 ## Team Information
 
 - **Shirley Qin**  
-  Student Number: 1004555297  
   Email: shirley.qin@mail.utoronto.ca
 
-- **Yuyang Zeng**  
-  Student Number: 1005777054  
+- **Yuyang Zeng**   
   Email: ryanyy.zeng@mail.utoronto.ca
 
 ---
