@@ -227,26 +227,7 @@ Ensure Supabase and PostgreSQL URLs in your `.env.local` file point to your host
 
 ---
 
-### **Individual Contributions**
-
-#### **Shirley Qin**
-
-- Implemented authentication (sign up/sign in) using NextAuth.js and designed the partner linking system.
-- Built the full-featured important date management system. Created interfaces for adding, viewing, and managing shared events.
-- Designed and developed the upload interface of the Shard Photo Album , built real-time photo commenting using Supabase Realtime, with efficient updates and UI interaction.
-- Handled styling and layout using Ant Design and Tailwind CSS across all pages.
-- Managed overall project structure, code organization, and authored the final report.
-
-#### **Yuyang Zeng**
-
-- Designed the database schema with Prisma and configured Supabase Storage.
-- Implemented the live location sharing feature using the browser's Geolocation API and Supabase Realtime broadcast. Developed logic to poll and broadcast location updates, including rendering both users on a Google Map with markers and distance line.
-- Built backend API routes for location, photo, and comment handling.
-- Contributed to UI components, Sign In/Sign Up forms, authored and reviewed the final report.
-
----
-
-## Lessons Learned and Concluding Remarks
+## Concluding Remarks
 
 This project allowed us to go beyond basic CRUD functionality and integrate real-time and cloud storage features using full-stack Next.js. Some of the most valuable technical and soft skills we developed include:
 
