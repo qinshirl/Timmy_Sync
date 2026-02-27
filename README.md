@@ -1,14 +1,5 @@
 # TimmySync – A Relationship Enhancement Web Application
 
-## Team Information
-
-- **Shirley Qin**  
-  Email: shirley.qin@mail.utoronto.ca
-
-- **Yuyang Zeng**   
-  Email: ryanyy.zeng@mail.utoronto.ca
-
----
 
 ## Motivation
 
